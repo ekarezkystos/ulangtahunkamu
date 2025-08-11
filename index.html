@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Selamat Ulang Tahun Sayang</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Mini Game -->
+  <div class="game-container" id="gameContainer">
+    <div class="game-question" id="gameQuestion">Loading pertanyaan...</div>
+    <input type="text" id="answerInput" class="answer-input" placeholder="Tulis jawabanmu di sini..." />
+    <br />
+    <button class="submit-btn" onclick="checkAnswer()">Submit</button>
+    <div id="feedback" class="wrong-answer" style="display: none;"></div>
+  </div>
+
+  <!-- Suara Efek -->
+  <audio id="correctSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_b41a404f41.mp3" preload="auto"></audio>
+  <audio id="wrongSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_b130e3587f.mp3" preload="auto"></audio>
+
+  <!-- Confetti -->
+  <canvas id="confettiCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;"></canvas>
+
+  <!-- Efek Love -->
+  <div class="love-container" id="loveContainer"></div>
+  <!-- Tombol rahasia di pojok kanan bawah -->
+  <div id="easterEgg" title="👀"></div>
+
+
+  <!-- Halaman Utama (disembunyikan dulu) -->
+  <div class="centered" style="display: none;">
+    <div class="big-decor left"></div>
+<div class="big-decor right"></div>
+
+    <h1>Selamat Ulang Tahun, Amalia Putri Sayangku! 🎂💕</h1>
+    <img src="fotosatu.jpg" alt="Foto Pacar" class="foto-pacar">
+    <p>Semoga di 20 tahun ini adalah awal dari segala hal positif perjalanan kamu ya, tapi harus selalu ada akunya juga hehehe. 
+      Semoga kamu lebih banyak tawa, lebih sedikit air mata, dan rasakan cinta yang nggak pernah habis — dariku.💖</p>
+    <div class="button-group">
+      <button onclick="location.href='ucapan.html'">Ucapan Dari Aku 💌</button>
+    </div>
+  </div>
+
+  <!-- Script Utama -->
+  <script>
+    // Animasi Love Jatuh
+    function createLove() {
+      const love = document.createElement("div");
+      love.classList.add("love");
+      love.style.left = Math.random() * 100 + "vw";
+      love.style.animationDuration = 2 + Math.random() * 3 + "s";
+      document.querySelector(".love-container").appendChild(love);
+      setTimeout(() => love.remove(), 5000);
+    }
+    setInterval(createLove, 300);
+
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .love {
+        width: 20px;
+        height: 20px;
+        background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png');
+        background-size: cover;
+        position: absolute;
+        top: 0;
+        animation: fall linear;
+        z-index: 0;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(100vh);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Pertanyaan & Jawaban
+    const questions = [
+      { q: "Sekarang kamu ulang tahun ke berapa?", a: ["20"] },
+      { q: "Kita jadian di bulan apa? 🌙", a: ["September", "september"] },
+      { q: "Apa nama panggilan sayang kamu ke aku? 😘", a: ["sayang", "mas"] },
+      { q: "Hewan apa yang paling kamu suka?", a: ["kucing", "Kucing","ucing"]  }
+    ];
+
+    let currentQuestion;
+    const gameContainer = document.getElementById("gameContainer");
+    const gameQuestion = document.getElementById("gameQuestion");
+    const answerInput = document.getElementById("answerInput");
+    const feedback = document.getElementById("feedback");
+    const correctSound = document.getElementById("correctSound");
+    const wrongSound = document.getElementById("wrongSound");
+
+    function loadRandomQuestion() {
+      currentQuestion = questions[Math.floor(Math.random() * questions.length)];
+      gameQuestion.innerText = currentQuestion.q;
+    }
+    loadRandomQuestion();
+
+    function checkAnswer() {
+      const userAnswer = answerInput.value.trim().toLowerCase();
+      if (currentQuestion.a.includes(userAnswer)) {
+        correctSound.play();
+        showConfetti();
+        setTimeout(() => {
+          gameContainer.style.display = "none";
+          document.querySelector(".centered").style.display = "block";
+        }, 1000);
+      } else {
+        wrongSound.play();
+        feedback.innerText = "Yah salah 🥲 Coba lagi ya!";
+        feedback.style.display = "block";
+        shakeFeedback();
+        loadRandomQuestion();
+        answerInput.value = "";
+      }
+    }
+
+    function shakeFeedback() {
+      feedback.classList.remove("shake");
+      void feedback.offsetWidth;
+      feedback.classList.add("shake");
+    }
+
+    function showConfetti() {
+      const duration = 1.5 * 1000;
+      const end = Date.now() + duration;
+      const colors = ['#ff4d88', '#ff66b2', '#ffb6c1', '#ffe6f0'];
+      (function frame() {
+        confetti({
+          particleCount: 6,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: colors,
+        });
+        confetti({
+          particleCount: 6,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: colors,
+        });
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+    
+  </script>
+<!-- Script utama + Alt+U -->
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("keydown", function (e) {
+      if (e.altKey && (e.key === "v" || e.key === "V")) {
+        e.preventDefault();
+        window.location.href = "video.html";
+      }
+    });
+  </script>
+</body>
+</html>

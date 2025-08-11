@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ucapan Untukmu</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Musik -->
+  <audio autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+    Browsermu tidak mendukung audio.
+  </audio>
+
+  <!-- Efek Love -->
+  <div class="love-container" id="loveContainer"></div>
+
+  <!-- Narasi -->
+  <div class="centered">
+    <div class="big-decor left"></div>
+  <div class="big-decor right"></div>
+
+    <h1>Selamat 20 Tahun Sayang  💌</h1>
+    <div class="ucapan-scroll">
+    <p style="max-width: 600px; margin: auto; font-size: 1.2em; line-height: 1.8em;">
+Yang pertama sudah pasti doa, Panjang umur sehat selalu ya Amalia Putri. Segala doa dalam bentuk hal apapun semoga senantiasa menyertai kamu, aamiin.      <br><br>
+Hari ini bukan Cuma persoalan bertambahnya angka di umur kamu, lebih dari itu; tentang semua cerita, perjalanan yang sudah kamu tempuh sampai pada akhirnya ada di titik ini. Hal-hal baik, hal-hal buruk, segala hal hal dalam bentuk apapun, kamu selalu menyanggupinya. Jika ada satu satunya orang yang paham atas itu semua, itu Adalah aku. Dari setiap tawa, duka, amarah, kasih sayang, obrolan Panjang, sampai momen-momen yang terkadang mungkin Cuma kita berdua yang bisa mengerti, semuanya berharga untuk aku.      <br><br>
+      
+      Semua jauh lebih baik Ketika hidupmu memahami arti dari keberhargaan. Ya, kamu sudah memahaminya dan mari kita rayakan 20 tahun milikmu dengan program sederhana yang aku buat sedemikian sehingga dengan harapan minimal kedua ujung bibirmu sedikit terikat naik ke atas, atau dalam arti lain Bahagia.
+      <br><br>
+      Terimakasih banyak sudah berada di dunia yang sama dengan milikku. Tidak pernah berhenti merasa bangga dan tidak pernah merasa sebangga ini karena sudah menemukanmu di hidupku. Persoalan bangga, aku juga bangga dengan semua hal tentang kamu, bukan Cuma karena apa yang sudah kamu capai, tapi juga karena siapa diri kamu yang sebenarnya.
+      <br><br>
+      Selalu di segala hal soal kita berdua, seringkali kita ada di hari yang biasa-biasa aja. Bukan hari special, tidak ada perayaan, tidak ada acara mewah. Namun aku sadar, yang bikin itu semua jadi momen special itu Adalah kamu. Kamu yang bisa bikin hidup aku semakin berwarna. Kamu yang buat aku jadi punya alasan untuk suka senyum senyum sendiri kadang kala. 
+      <br><br>
+      Ada banyak revolusi positif yang aku alami sejak hadirnya kamu yang kedua kali. Dan kalau kamu bertanya kenapa aku bisa segila ini, jawabannya Cuma satu; di pikiranku, kita ini bukan Cuma dalam bentuk  manusia saja. kita Adalah dua planet aneh yang kebetulan punya orbit yang bertabrakan, dan setiap kali kita nabrak, kita bakalan bikin kembang api yang cantiknya bukan main, kembang api yang sebelumnya gapernah ada dan gamungkin bakal ada kalo bukan kita yang buat. Jadi jangan pernah pergi ya. Jangan biarkan aku jadi asteroid kesepian yang kerjaannya Cuma muter muter di angkasa tanpa tujuan. Tetaplah jadi kamu, yang entah gimana caranya berhasil membuat kata “aku sayang kamu” terdengar terlalu kecil dibanding rasa yang sebenarnya. 
+      <br><br>
+      Selamat 20 tahun, sayang. Kamu tidak cuma bertambah umur, kamu sedang bertambah semesta di dalam dirimu. Dan aku, dengan segala cara paling sederhana yang aku bisa, akan terus jadi orang yang beruntung karena bisa berjalan di dalamnya.
+      <br><br>
+      Bahagia terus ya sayang, tenang aja, bakal selalu ada aku di setiap milimeter kebahagiaan kamu. Pendewasaan tidak seburuk itu kok, kuat kuat ya sayang. Semoga lebih bisa dikontrol lagi ya emosinya. Terus sayang sama aku juga yaa.
+      <br><br>
+      Tunggu perayaan yang lainnya, dan semoga kamu suka. Sekali lagi, selamat 20 tahun sayang. Makin deket aja nih tanggal nikah kita hehehe. 
+      <br><br>
+      Happy Birthday, Love! 🎉💖
+    </p>
+    <br>
+  </div>
+    <button onclick="location.href='index.html'">Balik ke Halaman Utama 🏠</button>
+  
+
+  <!-- JS untuk love jatuh -->
+  <script>
+    function createLove() {
+      const love = document.createElement("div");
+      love.classList.add("love");
+      love.style.left = Math.random() * 100 + "vw";
+      love.style.animationDuration = 2 + Math.random() * 3 + "s";
+      document.querySelector(".love-container").appendChild(love);
+      setTimeout(() => love.remove(), 5000);
+    }
+    setInterval(createLove, 300);
+
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .love {
+        width: 20px;
+        height: 20px;
+        background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png');
+        background-size: cover;
+        position: absolute;
+        top: 0;
+        animation: fall linear;
+        z-index: 0;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(100vh);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
